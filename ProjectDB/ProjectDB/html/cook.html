@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+        <title>Пример для css-live.ru</title>
+        
+        <style type="text/css">    
+           * { margin: 0; padding: 0; }
+           p { margin: 30px; }
+           h1 { margin: 30px; }           
+           #left { position: absolute; left: 0; top: 0; height: 100%; width: 25%; background-color: #7c7365;}
+           #right 
+           { 
+           position: absolute; 
+           right: 0;
+           top: 0; 
+           width: 75%; 
+           } 
+                   body {
+
+        }
+        
+                table {
+            margin: 30px 0px 0px 30px;
+            padding: 0px;
+            width="366";
+            height="46";
+            border="1px";
+            cellpadding="0";
+            cellspacing="0";
+            float: left;
+        }
+           
+                   input {
+                  
+            padding: 1px;
+            margin: 1px;
+            border-style: none;
+        }
+              .button {
+                margin: 0px 0px 0px 0px;  
+                align: right;
+            
+        }
+        .table {
+             margin: 30px 0px 0px 30px;
+            border-style: solid;
+            border-width: 1px;
+            width: 3em;
+    		height: 3em;
+        }
+
+            .table:hover {
+                background-color: #7c7365;
+            }
+           
+        </style>
+</head>
+
+<body>
+    <div id="left"></div>
+
+    <div id="right">
+    <table id="dishes"></table>
+    </div>
+    
+        <script>
+        async function table_buttons() {
+        	for (let i = 1; i <= 6; i ++) {
+                var button = document.createElement("button");
+                var text = i;
+				button.appendChild(document.createTextNode(text));
+
+				button.setAttribute('class', 'table');
+				button.setAttribute('id', i);  
+                var fun = "show_table(" + i + ")";
+                button.setAttribute('onclick', fun);
+                const doc = document.getElementById("left");
+				doc.appendChild(button);
+				if (i==20) {
+					button.setAttribute('style', 'margin: 30px 30px 30px 30px');
+                }
+            }
+        }
+		table_buttons();
+
+		async function show_table(id) {
+        
+        const doc = document.getElementById("right");
+        	doc.innerHTML = '';
+           
+            var ceil = document.createElement("p");
+            ceil.setAttribute('align', 'right');
+            doc.appendChild(ceil);
+            
+            var button_exit = document.createElement("button");
+            button_exit.appendChild(document.createTextNode("Выйти"));
+            button_exit.setAttribute('onclick', "document.location='/logout'");
+          
+            ceil.appendChild(button_exit);
+        
+        
+            var text = document.createElement("h1");
+        	var content = "Your table is " + id + ".";
+            text.appendChild(document.createTextNode(content));
+            
+			doc.appendChild(text);
+            
+            
+            var table = document.createElement("TABLE");
+    table.setAttribute("id", "dishes");
+    table.setAttribute("valign", "top");
+    //document.body.appendChild(x);
+            doc.appendChild(table);
+            
+            var sum = 0;
+
+for (let j = 1; j <= 10; j++) 
+{
+    let row = table.insertRow();
+    
+    //window.alert("hello");
+    
+    let cell1 = row.insertCell();
+    cell1.innerHTML = id + " " + j + ' dish';
+    
+    let cell2 = row.insertCell();
+	cell2.innerHTML = id + " " + j + ' руб';
+    
+    sum=sum+id;
+
+    let cell3 = row.insertCell();
+    var button_delete = document.createElement("button");
+    button_delete.appendChild(document.createTextNode("Delete***"));
+    var fun = "delete_dish(" + id + "," + j + ")";
+    button_delete.setAttribute('onclick', fun);
+	cell3.appendChild(button_delete);
+}
+let row = table.insertRow();
+let cell1 = row.insertCell();
+
+let row2 = table.insertRow();
+let cell2 = row2.insertCell();
+cell2.innerHTML = 'Итого: ' + sum + ' руб';
+
+            var table2 = document.createElement("TABLE");
+    table2.setAttribute("id", "dishes");
+    table2.setAttribute("valign", "top");
+            doc.appendChild(table2);
+
+for (let j = 1; j <= 20; j++) 
+{
+    let row = table2.insertRow();
+    
+    
+    let cell1 = row.insertCell();
+    cell1.innerHTML = j + ' dish';
+    
+    
+    let cell2 = row.insertCell();
+        var button_add = document.createElement("button");
+    button_add.appendChild(document.createTextNode("Add***"));
+    var fun = "add_dish(" + j + ")";
+    button_add.setAttribute('onclick', fun);
+cell2.appendChild(button_add);
+}
+        }	
+                async function delete_dish(id1, id2) {
+        	window.alert(id1 + " стол " + id2 + " блюдо");
+        }
+        
+                async function add_dish(id) {
+        	window.alert(id + " блюдо");
+        }
+    </script>
+</body>
+</html>
