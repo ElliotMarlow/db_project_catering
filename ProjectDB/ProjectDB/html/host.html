@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+        <title>Пример для css-live.ru</title>
+        
+        <style type="text/css">    
+           * { margin: 0; padding: 0; }
+           p { margin: 30px; }
+           h1 { margin: 30px; }           
+           #left { 
+           position: absolute; left: 0; top: 0; height: 100%;  background-color: #7c7365;
+           }
+           #right 
+           { 
+           position: absolute; 
+           right: 0;
+           top: 0; 
+           width: 60%; 
+           } 
+                   body {
+
+        }
+        
+                table {
+            margin: 30px 30px 0px 30px;
+            padding: 30px;
+            width = "366";
+            height = "46";
+            
+            cellpadding = "0";
+            cellspacing = "0";
+            float: left;
+            
+            border-width: 1px;
+            border-collapse: collapse;
+        }
+        
+                  .table2 {
+            
+            border-collapse: collapse;
+            
+        }      
+        
+              TD, TH {
+    padding: 1px 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+   }
+   TH {
+    background: #b0e0e6; /* Цвет фона */
+   }
+           
+                   input {
+            padding: 1px;
+            margin: 1px;
+            border-style: none;
+        }
+              .button_right {
+                margin: 0px 0px 0px 0px;  
+                align: right;
+            width: 3em;
+    		height: 3em;
+        }
+        .table {
+             margin: 30px 0px 0px 30px;
+            border-style: solid;
+            border-width: 1px;
+            width: 3em;
+    		height: 3em;
+        }
+
+            .table:hover {
+                background-color: #7c7365;
+            }
+        .chosen_table {
+             margin: 30px 0px 0px 30px;
+            border-style: solid;
+            border-width: 1px;
+            width: 3em;
+    		height: 3em;
+            
+            background-color: #eb4034;
+        }           
+        </style>
+</head>
+
+<body>
+    <div id="left"></div>
+
+    <div id="right">
+    <table id="dishes"></table>
+    </div>
+        <script>    
+    function table_reserve() {
+    const doc = document.getElementById("left");
+        const res = 15;
+        var table = document.createElement("TABLE");
+        table.setAttribute("id", "reserves");
+    	table.setAttribute("valign", "top");
+        doc.appendChild(table);
+  //      let row = table.insertRow();
+    //   let cell1 = row.insertCell();
+    //    cell1.innerHTML = 'время';
+   //     let cell2 = row.insertCell();
+   //     cell2.innerHTML = 'стол';    
+        for (let i = 1; i <= res; i ++) {
+            let row = table.insertRow();
+            
+            let cell1 = row.insertCell();
+            cell1.innerHTML = 'time';
+            
+            let cell2 = row.insertCell();
+            cell2.innerHTML = 'tab';
+
+    		let cell3 = row.insertCell();
+    		var button_edit = document.createElement("button");
+    		button_edit.appendChild(document.createTextNode("E*"));
+    		var fun = "edit_reserve(" + 10 + "," + i + ")";
+    		button_edit.setAttribute('onclick', fun);
+			cell3.appendChild(button_edit);
+            
+            
+            let cell4 = row.insertCell();
+    		var button_delete = document.createElement("button");
+    		button_delete.appendChild(document.createTextNode("D*"));
+    		var fun = "delete_reserve(" + 10 + "," + i + ")";
+    		button_delete.setAttribute('onclick', fun);
+			cell4.appendChild(button_delete);
+            }
+            
+            const doc2 = document.getElementById("right");
+            var ceil = document.createElement("p");
+            ceil.setAttribute('align', 'right');
+            doc2.appendChild(ceil);
+            
+            var button_report = document.createElement("button");
+            button_report.appendChild(document.createTextNode("Отчёт"));
+            //button_report.setAttribute('onclick', "document.location='/logout'");**
+            ceil.appendChild(button_report);            
+            
+            var button_exit = document.createElement("button");
+            button_exit.appendChild(document.createTextNode("Выйти"));
+            button_exit.setAttribute('onclick', "document.location='/logout'");
+            ceil.appendChild(button_exit);
+            
+            var ceil = document.createElement("p");
+            ceil.setAttribute('align', 'right');
+            doc2.appendChild(ceil);
+            
+            var date = document.createElement("INPUT");
+			date.setAttribute("id", "date");            
+			date.setAttribute("type", "date");
+            ceil.appendChild(date);            
+            
+            var time = document.createElement("INPUT");
+            time.setAttribute("id", "time");
+			time.setAttribute("type", "time");
+            ceil.appendChild(time);             
+            
+            var button_new_reserve = document.createElement("button");
+            button_new_reserve.appendChild(document.createTextNode("Новая бронь"));
+            var fun = "search()";
+            button_new_reserve.setAttribute('onclick', fun);
+            ceil.appendChild(button_new_reserve);     
+            
+            
+              
+            
+            // , число мест, кнопка
+            const new_res = 5;
+        	var table = document.createElement("TABLE");
+        	table.setAttribute("id", "new_res");
+            //table.setAttribute('align', 'right');
+    		table.setAttribute("class", "table2");
+        	doc2.appendChild(table);
+ 
+        for (let i = 1; i <= new_res; i ++) {
+            let row = table.insertRow();
+            
+            let cell1 = row.insertCell();
+            cell1.innerHTML = 'table_id';
+            
+            let cell2 = row.insertCell();
+            cell2.innerHTML = 'sit_number';
+
+
+    		let cell3 = row.insertCell();
+    		var button_res = document.createElement("button");
+    		button_res.appendChild(document.createTextNode("Res*"));
+    		var fun = "new_res(" + i + "," + 5 + ")";
+    		button_res.setAttribute('onclick', fun);
+			cell3.appendChild(button_res);
+            }
+            
+        }
+		table_reserve();
+    
+    function search() {
+    		var t = document.getElementById("time").value;
+            var d = document.getElementById("date").value;
+        	window.alert(t + " время " + d + " дата");
+        }
+    	
+    function new_res(id, num) {
+    	var name = prompt("Для кого бронируется " + id + " столик на " + num + " мест?");
+        var phone = prompt("Номер телефона:");
+        window.alert(name + " " + phone + "");
+        	//window.alert(id + " стол " + num + " мест");
+        }   
+    
+    
+    
+    
+    
+
+        
+
+    </script>
+</body>
+</html>

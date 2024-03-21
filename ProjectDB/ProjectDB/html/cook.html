@@ -23,24 +23,38 @@
                 table {
             margin: 30px 0px 0px 30px;
             padding: 0px;
-            width="366";
-            height="46";
-            border="1px";
-            cellpadding="0";
-            cellspacing="0";
+            width ="366";
+            height ="46";
+            
+            cellpadding ="0";
+            cellspacing ="0";
             float: left;
+            
+            border-style: solid;
+            border-width: 1px;
+            border-collapse: collapse;
         }
-           
+              TD, TH {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+   }
+   TH {
+    background: #b0e0e6; /* Цвет фона */
+   }
                    input {
+                  
+                  
+                  
                   
             padding: 1px;
             margin: 1px;
             border-style: none;
         }
-              .button {
+              .button_right {
                 margin: 0px 0px 0px 0px;  
                 align: right;
-            
+            width: 3em;
+    		height: 3em;
         }
         .table {
              margin: 30px 0px 0px 30px;
@@ -48,11 +62,43 @@
             border-width: 1px;
             width: 3em;
     		height: 3em;
+            
+            background-color: #4287f5;
         }
 
             .table:hover {
-                background-color: #7c7365;
+                background-color: #07204a;
             }
+        .chosen_table {
+             margin: 30px 0px 0px 30px;
+            border-style: solid;
+            border-width: 1px;
+            width: 3em;
+    		height: 3em;
+            
+            background-color: #4287f5;
+        }             
+            
+        .occupe_table {
+             margin: 30px 0px 0px 30px;
+            border-style: solid;
+            border-width: 1px;
+            width: 3em;
+    		height: 3em;
+            
+            background-color: #eb4034;
+        } 
+        
+        .free_table {
+             margin: 30px 0px 0px 30px;
+            border-style: solid;
+            border-width: 1px;
+            width: 3em;
+    		height: 3em;
+            
+            background-color: #12c418;
+        }            
+           
            
         </style>
 </head>
@@ -66,20 +112,26 @@
     
         <script>
         async function table_buttons() {
+        	const doc = document.getElementById("left");
+        	doc.innerHTML = '';
+            
         	for (let i = 1; i <= 6; i ++) {
                 var button = document.createElement("button");
                 var text = i;
 				button.appendChild(document.createTextNode(text));
-
-				button.setAttribute('class', 'table');
+                if (true)//занято
+                {
+					button.setAttribute('class', 'occupe_table');
+                }
+                else
+                {
+                	button.setAttribute('class', 'free_table');
+                }
 				button.setAttribute('id', i);  
                 var fun = "show_table(" + i + ")";
                 button.setAttribute('onclick', fun);
                 const doc = document.getElementById("left");
 				doc.appendChild(button);
-				if (i==20) {
-					button.setAttribute('style', 'margin: 30px 30px 30px 30px');
-                }
             }
         }
 		table_buttons();
@@ -87,8 +139,18 @@
 		async function show_table(id) {
         
         const doc = document.getElementById("right");
+            table_buttons();        
         	doc.innerHTML = '';
-           
+
+            for (let i = 1; i <= 6; i ++) {
+            	var str_id = i+"";
+            	var button_table = document.getElementById(str_id);
+				if (i==id) {
+					button_table.setAttribute('class', 'chosen_table');
+                }
+
+
+            }           
             var ceil = document.createElement("p");
             ceil.setAttribute('align', 'right');
             doc.appendChild(ceil);
@@ -139,9 +201,27 @@ for (let j = 1; j <= 10; j++)
 let row = table.insertRow();
 let cell1 = row.insertCell();
 
-let row2 = table.insertRow();
-let cell2 = row2.insertCell();
-cell2.innerHTML = 'Итого: ' + sum + ' руб';
+
+cell1.innerHTML = 'Итого: ' + sum + ' руб';
+
+
+let cell2 = row.insertCell();
+cell2.setAttribute("colspan", "2");
+cell2.setAttribute("align", "center");
+var button_pay = document.createElement("button");
+    button_pay.appendChild(document.createTextNode("Pay***"));
+    var fun = "pay()";
+    button_pay.setAttribute('onclick', fun);
+	cell2.appendChild(button_pay);
+
+
+
+
+
+
+
+
+
 
             var table2 = document.createElement("TABLE");
     table2.setAttribute("id", "dishes");
@@ -172,6 +252,14 @@ cell2.appendChild(button_add);
                 async function add_dish(id) {
         	window.alert(id + " блюдо");
         }
+        
+        show_table(1);
+        
+        
+setTimeout(function(){
+	location.reload();
+}, 3*1000);
+        
     </script>
 </body>
 </html>
