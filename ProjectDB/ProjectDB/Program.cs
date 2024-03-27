@@ -1,7 +1,11 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+
+
+
+
 
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/login");
@@ -22,12 +26,13 @@ static bool Check(string login, string password)
         return false;
     }
 }
+//Restaurant1
 
 static string GetAllSQL(string table)
 {
     string response = "";
     string request = "select * from " + table;
-    using (SqlConnection connection = new SqlConnection(@"Data Source=LAPTOP-2MJPKAS0\MSSQLSERVER02;Initial Catalog=MY_DB;Integrated Security=True"))
+    using (SqlConnection connection = new SqlConnection(@"Server=DESKTOP-PHIG5LD\MSSQLSERVER01;Database=Restaurant1;Trusted_Connection=True;TrustServerCertificate=True;"))
     {
         connection.Open();
         SqlCommand command = new(request, connection);
@@ -36,7 +41,12 @@ static string GetAllSQL(string table)
         {
             while (reader.Read())
             {
-                response += reader.GetValue(0) + "%&%&" + reader.GetValue(1) + "%&%&" + reader.GetValue(2) + "%&%&" + reader.GetValue(5) + "%&%&";
+                for (int i = 0; reader.FieldCount > i; i++)
+                {
+                    response += reader.GetValue(i) + "%&%&";
+                }
+                 //+ reader.GetValue(1) + "%&%&" + reader.GetValue(2) + "%&%&" + reader.GetValue(5) + "%&%&";
+                 response += "&&&";
             }
         }
         reader.Close();
@@ -98,8 +108,8 @@ app.MapGet("/manage", (HttpContext context) =>
 
 app.MapGet("/api/tables", (HttpContext context) =>
 {
-
-    context.Response.WriteAsJsonAsync(context.User.Identity.Name.ToString());
+    Console.WriteLine(GetAllSQL("tbl_Table"));
+    //context.Response.WriteAsJsonAsync(GetAllSQL("tbl_Table"));
 });
 
 

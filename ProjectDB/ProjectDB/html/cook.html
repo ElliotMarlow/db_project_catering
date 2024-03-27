@@ -131,7 +131,14 @@
     headers: { "Accept": "application/json" }
 });
 if (response.ok === true) {
-    const login = await response.json();
+    const answer = await response.json();
+    window.alert(answer);
+    // const tables = response.split("&&&");
+    // for (let i = 0; i < arr.length - 1; i ++)
+    // {
+        
+    // }
+   
 }
 
 
