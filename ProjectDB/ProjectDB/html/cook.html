@@ -126,6 +126,16 @@
             const doc = document.getElementById("left");
             doc.innerHTML = '';
 
+            const response = await fetch("/api/tables", {
+    method: "GET",
+    headers: { "Accept": "application/json" }
+});
+if (response.ok === true) {
+    const login = await response.json();
+}
+
+
+
             for (let i = 1; i <= 6; i++) {
                 var button = document.createElement("button");
                 var text = i;

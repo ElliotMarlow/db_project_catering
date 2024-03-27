@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/login");
@@ -12,7 +13,7 @@ app.UseAuthorization();
 
 static bool Check(string login, string password)
 {
-    if ((login == "cook" && password == "CoOk123@") |  (login == "manage" && password == "MaNaGeR123@"))
+    if ((login == "cook" && password == "CoOk123@") | (login == "manage" && password == "MaNaGeR123@"))
     {
         return true;
     }
@@ -20,6 +21,27 @@ static bool Check(string login, string password)
     {
         return false;
     }
+}
+
+static string GetAllSQL(string table)
+{
+    string response = "";
+    string request = "select * from " + table;
+    using (SqlConnection connection = new SqlConnection(@"Data Source=LAPTOP-2MJPKAS0\MSSQLSERVER02;Initial Catalog=MY_DB;Integrated Security=True"))
+    {
+        connection.Open();
+        SqlCommand command = new(request, connection);
+        SqlDataReader reader = command.ExecuteReader();
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                response += reader.GetValue(0) + "%&%&" + reader.GetValue(1) + "%&%&" + reader.GetValue(2) + "%&%&" + reader.GetValue(5) + "%&%&";
+            }
+        }
+        reader.Close();
+    }
+    return response;
 }
 
 
@@ -71,6 +93,13 @@ app.MapGet("/manage", (HttpContext context) =>
 {
     context.Response.ContentType = "text/html; charset=utf-8";
     context.Response.SendFileAsync("html/host.html").GetAwaiter().GetResult();
+});
+
+
+app.MapGet("/api/tables", (HttpContext context) =>
+{
+
+    context.Response.WriteAsJsonAsync(context.User.Identity.Name.ToString());
 });
 
 
