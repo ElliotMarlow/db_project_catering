@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj": {}
+    "C:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj": {}
   },
   "projects": {
-    "c:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj": {
+    "C:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj",
+        "projectUniqueName": "C:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj",
         "projectName": "ProjectDB",
-        "projectPath": "c:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj",
+        "projectPath": "C:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\ProjectDB.csproj",
         "packagesPath": "C:\\Users\\drago\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\obj\\",
+        "outputPath": "C:\\Users\\drago\\Desktop\\Учёба\\СУБД\\Проект\\Clone1\\db_project_catering\\ProjectDB\\ProjectDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

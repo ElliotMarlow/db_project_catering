@@ -2,264 +2,261 @@
 <html>
 <head>
     <meta charset="utf-8" />
-        <title>Пример для css-live.ru</title>
-        
-        <style type="text/css">    
-           * { margin: 0; padding: 0; }
-           p { margin: 30px; }
-           h1 { margin: 30px; }           
-           #left { position: absolute; left: 0; top: 0; height: 100%; width: 25%; background-color: #7c7365;}
-           #right 
-           { 
-           position: absolute; 
-           right: 0;
-           top: 0; 
-           width: 75%; 
-           } 
-                   body {
+    <title>Пример для css-live.ru</title>
 
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
         }
-        
-                table {
+
+        p {
+            margin: 30px;
+        }
+
+        h1 {
+            margin: 30px;
+        }
+
+        #left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 25%;
+            background-color: #7c7365;
+        }
+
+        #right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 75%;
+        }
+
+        body {
+        }
+
+        table {
             margin: 30px 0px 0px 30px;
             padding: 0px;
             width ="366";
             height ="46";
-            
             cellpadding ="0";
             cellspacing ="0";
             float: left;
-            
             border-style: solid;
             border-width: 1px;
             border-collapse: collapse;
         }
-              TD, TH {
-    padding: 3px; /* Поля вокруг содержимого таблицы */
-    border: 1px solid black; /* Параметры рамки */
-   }
-   TH {
-    background: #b0e0e6; /* Цвет фона */
-   }
-                   input {
-                  
-                  
-                  
-                  
+
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px solid black; /* Параметры рамки */
+        }
+
+        TH {
+            background: #b0e0e6; /* Цвет фона */
+        }
+
+        input {
             padding: 1px;
             margin: 1px;
             border-style: none;
         }
-              .button_right {
-                margin: 0px 0px 0px 0px;  
-                align: right;
+
+        .button_right {
+            margin: 0px 0px 0px 0px;
+            align: right;
             width: 3em;
-    		height: 3em;
+            height: 3em;
         }
+
         .table {
-             margin: 30px 0px 0px 30px;
+            margin: 30px 0px 0px 30px;
             border-style: solid;
             border-width: 1px;
             width: 3em;
-    		height: 3em;
-            
+            height: 3em;
             background-color: #4287f5;
         }
 
             .table:hover {
                 background-color: #07204a;
             }
+
         .chosen_table {
-             margin: 30px 0px 0px 30px;
+            margin: 30px 0px 0px 30px;
             border-style: solid;
             border-width: 1px;
             width: 3em;
-    		height: 3em;
-            
+            height: 3em;
             background-color: #4287f5;
-        }             
-            
+        }
+
         .occupe_table {
-             margin: 30px 0px 0px 30px;
+            margin: 30px 0px 0px 30px;
             border-style: solid;
             border-width: 1px;
             width: 3em;
-    		height: 3em;
-            
+            height: 3em;
             background-color: #eb4034;
-        } 
-        
+        }
+
         .free_table {
-             margin: 30px 0px 0px 30px;
+            margin: 30px 0px 0px 30px;
             border-style: solid;
             border-width: 1px;
             width: 3em;
-    		height: 3em;
-            
+            height: 3em;
             background-color: #12c418;
-        }            
-           
-           
-        </style>
+        }
+    </style>
 </head>
 
 <body>
     <div id="left"></div>
 
     <div id="right">
-    <table id="dishes"></table>
+        <table id="dishes"></table>
     </div>
-    
-        <script>
+
+    <script>
         async function table_buttons() {
-        	const doc = document.getElementById("left");
-        	doc.innerHTML = '';
-            
-        	for (let i = 1; i <= 6; i ++) {
+            const doc = document.getElementById("left");
+            doc.innerHTML = '';
+
+            for (let i = 1; i <= 6; i++) {
                 var button = document.createElement("button");
                 var text = i;
-				button.appendChild(document.createTextNode(text));
+                button.appendChild(document.createTextNode(text));
                 if (true)//занято
                 {
-					button.setAttribute('class', 'occupe_table');
+                    button.setAttribute('class', 'occupe_table');
                 }
-                else
-                {
-                	button.setAttribute('class', 'free_table');
+                else {
+                    button.setAttribute('class', 'free_table');
                 }
-				button.setAttribute('id', i);  
+                button.setAttribute('id', i);
                 var fun = "show_table(" + i + ")";
                 button.setAttribute('onclick', fun);
                 const doc = document.getElementById("left");
-				doc.appendChild(button);
+                doc.appendChild(button);
             }
         }
-		table_buttons();
+        table_buttons();
 
-		async function show_table(id) {
-        
-        const doc = document.getElementById("right");
-            table_buttons();        
-        	doc.innerHTML = '';
+        async function show_table(id) {
 
-            for (let i = 1; i <= 6; i ++) {
-            	var str_id = i+"";
-            	var button_table = document.getElementById(str_id);
-				if (i==id) {
-					button_table.setAttribute('class', 'chosen_table');
-                }
+            const doc = document.getElementById("right");
+            table_buttons();
+            doc.innerHTML = '';
+            document.getElementById(id + "").setAttribute('class', 'chosen_table');
 
-
-            }           
             var ceil = document.createElement("p");
             ceil.setAttribute('align', 'right');
             doc.appendChild(ceil);
-            
             var button_exit = document.createElement("button");
             button_exit.appendChild(document.createTextNode("Выйти"));
             button_exit.setAttribute('onclick', "document.location='/logout'");
-          
             ceil.appendChild(button_exit);
-        
-        
-            var text = document.createElement("h1");
-        	var content = "Your table is " + id + ".";
+
+
+
+            if (true)//есть заказ
+            {
+var text = document.createElement("h1");
+            var content = "Your table is " + id + ".";
             text.appendChild(document.createTextNode(content));
-            
-			doc.appendChild(text);
-            
-            
+
+            doc.appendChild(text);
+
+
             var table = document.createElement("TABLE");
-    table.setAttribute("id", "dishes");
-    table.setAttribute("valign", "top");
-    //document.body.appendChild(x);
+            table.setAttribute("id", "dishes");
+            table.setAttribute("valign", "top");
+            //document.body.appendChild(x);
             doc.appendChild(table);
-            
+
             var sum = 0;
 
-for (let j = 1; j <= 10; j++) 
-{
-    let row = table.insertRow();
-    
-    //window.alert("hello");
-    
-    let cell1 = row.insertCell();
-    cell1.innerHTML = id + " " + j + ' dish';
-    
-    let cell2 = row.insertCell();
-	cell2.innerHTML = id + " " + j + ' руб';
-    
-    sum=sum+id;
+            for (let j = 1; j <= 10; j++) {
+                let row = table.insertRow();
 
-    let cell3 = row.insertCell();
-    var button_delete = document.createElement("button");
-    button_delete.appendChild(document.createTextNode("Delete***"));
-    var fun = "delete_dish(" + id + "," + j + ")";
-    button_delete.setAttribute('onclick', fun);
-	cell3.appendChild(button_delete);
-}
-let row = table.insertRow();
-let cell1 = row.insertCell();
+                let cell1 = row.insertCell();
+                cell1.innerHTML = id + " " + j + ' dish';
 
+                let cell2 = row.insertCell();
+                cell2.innerHTML = id + " " + j + ' руб';
+                sum = sum + id;
 
-cell1.innerHTML = 'Итого: ' + sum + ' руб';
+                let cell3 = row.insertCell();
+                var button_delete = document.createElement("button");
+                button_delete.appendChild(document.createTextNode("Delete***"));
+                var fun = "delete_dish(" + id + "," + j + ")";
+                button_delete.setAttribute('onclick', fun);
+                cell3.appendChild(button_delete);
+            }
+            let row = table.insertRow();
+            let cell1 = row.insertCell();
+            cell1.innerHTML = 'Итого: ' + sum + ' руб';
 
+            let cell2 = row.insertCell();
+            cell2.setAttribute("colspan", "2");
+            cell2.setAttribute("align", "center");
+            var button_pay = document.createElement("button");
+            button_pay.appendChild(document.createTextNode("Pay***"));
+            var fun = "pay()";
+            button_pay.setAttribute('onclick', fun);
+            cell2.appendChild(button_pay);
 
-let cell2 = row.insertCell();
-cell2.setAttribute("colspan", "2");
-cell2.setAttribute("align", "center");
-var button_pay = document.createElement("button");
-    button_pay.appendChild(document.createTextNode("Pay***"));
-    var fun = "pay()";
-    button_pay.setAttribute('onclick', fun);
-	cell2.appendChild(button_pay);
-
-
-
-
-
+            
+            }
+            else {
+				var button_order = document.createElement("button");
+            	button_order.appendChild(document.createTextNode("Открыть заказ"));
+                var fun = "order()";
+            	button_order.setAttribute('onclick', fun);
+            	doc.appendChild(button_order);
+            }
 
 
-
-
-
-            var table2 = document.createElement("TABLE");
-    table2.setAttribute("id", "dishes");
-    table2.setAttribute("valign", "top");
+var table2 = document.createElement("TABLE");
+            table2.setAttribute("id", "dishes");
+            table2.setAttribute("valign", "top");
             doc.appendChild(table2);
 
-for (let j = 1; j <= 20; j++) 
-{
-    let row = table2.insertRow();
-    
-    
-    let cell1 = row.insertCell();
-    cell1.innerHTML = j + ' dish';
-    
-    
-    let cell2 = row.insertCell();
-        var button_add = document.createElement("button");
-    button_add.appendChild(document.createTextNode("Add***"));
-    var fun = "add_dish(" + j + ")";
-    button_add.setAttribute('onclick', fun);
-cell2.appendChild(button_add);
-}
-        }	
-                async function delete_dish(id1, id2) {
-        	window.alert(id1 + " стол " + id2 + " блюдо");
+            for (let j = 1; j <= 20; j++) {
+                let row = table2.insertRow();
+
+                let cell1 = row.insertCell();
+                cell1.innerHTML = j + ' dish';
+
+                let cell2 = row.insertCell();
+                var button_add = document.createElement("button");
+                button_add.appendChild(document.createTextNode("Add***"));
+                var fun = "add_dish(" + j + ")";
+                button_add.setAttribute('onclick', fun);
+                cell2.appendChild(button_add);
+            }
+
+            
         }
-        
-                async function add_dish(id) {
-        	window.alert(id + " блюдо");
+        async function delete_dish(id1, id2) {
+            window.alert(id1 + " стол " + id2 + " блюдо");
         }
-        
+
+        async function add_dish(id) {
+            window.alert(id + " блюдо");
+        }
+
         show_table(1);
-        
-        
-setTimeout(function(){
-	location.reload();
-}, 3*1000);
-        
+
+
+        setTimeout(function () {
+            location.reload();
+        }, 30 * 1000);
+
     </script>
 </body>
 </html>
